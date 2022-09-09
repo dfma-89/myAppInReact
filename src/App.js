@@ -3,6 +3,7 @@
 //Abajo del componente, van los EXPORTS
 import ItemListContainer from "./Components/ItemListContainer";
 import NavBar from "./Components/NavBar";
+import {  Routes, Route } from "react-router-dom";
 
 const App = () => {
   //Logica del componente
@@ -11,11 +12,32 @@ const App = () => {
   return (
     <div className="App">
       <NavBar />
-      <ItemListContainer nameEcommerce="Tienda Ficticia" />
-      {/*Tags de Autocierre*/}
+      <Routes>
+        <Route
+          path="/"
+          element={<ItemListContainer nameEcommerce="Tuki Store" />}
+        />
+        <Route
+          path="/category/:category/:id"
+          element={<ItemListContainer nameEcommerce="Tuki Store" />}
+        />
+        <Route
+          path="/about"
+          element={<h1>Work in progress: About</h1>}
+        />
+        <Route
+          path="*"
+          element={<ItemListContainer nameEcommerce="Tuki Store" />}
+        />
+        <Route
+          path="/item/:id"
+          element={<h1>Work in progress: Item</h1>}
+        />
+      </Routes>
+       {/* Tags de Autocierre */}
     </div>
   );
-}
+};
 
 export default App;
 
