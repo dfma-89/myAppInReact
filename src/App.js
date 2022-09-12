@@ -1,89 +1,21 @@
-//Arriba del componente van los IMPORTS
-//En el medio delcaramos el componnete funcional con lo que debe renderizar y la lógica que tenga
-//Abajo del componente, van los EXPORTS
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-// components
-import Navbar from "./Components/Navbar";
-import CharacterList from "./Components/CharacterList";
+import React from 'react';
+import { Routes, Route, Navigate } from "react-router-dom";
+import Navbar from './Components/Navbar'
+import TableData from './Components/TableData';
+import Formulario from './Components/Formulario';
 
 function App() {
-  const [characters, setCharacters] = useState([]);
-  const [info, setInfo] = useState({});
-  const url = "https://rickandmortyapi.com/api/character";
-
-  const fetchCharacters = (url) => {
-    axios
-      .get(url)
-      .then((data) => {
-        setCharacters(data.data.results);
-        setInfo(data.data.info);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const handleNextPage = () => {
-    fetchCharacters(info.next);
-    window.scrollTo(0, 0);
-  };
-
-  const handlePreviousPage = () => {
-    fetchCharacters(info.prev);
-    window.scrollTo(0, 0);
-  };
-
-  useEffect(() => {
-    fetchCharacters(url);
-  }, []);
-
   return (
     <>
-      <Navbar brand="Rick and Morty App" />
-
-      <div className="container py-5">
-        <nav>
-          <ul className="pagination justify-content-center">
-            {info.prev ? (
-              <li className="page-item">
-                <button className="page-link" onClick={handlePreviousPage}>
-                  Previous
-                </button>
-              </li>
-            ) : null}
-            {info.next ? (
-              <li className="page-item">
-                <button className="page-link" onClick={handleNextPage}>
-                  Next
-                </button>
-              </li>
-            ) : null}
-          </ul>
-        </nav>
-      </div>
-
-      <CharacterList characters={characters} />
-
-      <div className="container pb-5">
-        <nav>
-          <ul className="pagination justify-content-center">
-            {info.prev ? (
-              <li className="page-item">
-                <button className="page-link" onClick={handlePreviousPage}>
-                  Previous
-                </button>
-              </li>
-            ) : null}
-            {info.next ? (
-              <li className="page-item">
-                <button className="page-link" onClick={handleNextPage}>
-                  Next
-                </button>
-              </li>
-            ) : null}
-          </ul>
-        </nav>
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Formulario />} />
+          <Route path="/TableData" element={<TableData />} />
+          {/* <Route path="/" element={<Table />} />
+          <Route path="/" element={<RickandMorti />} />
+          <Route path="/*" element={<Navigate to="/" />} /> */}
+        </Routes>
       </div>
     </>
   );
