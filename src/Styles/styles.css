@@ -1,6 +1,5 @@
 
 .App {
-    background-color: yellow;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,7 +14,7 @@
 .TukiChild {
     background-color: greenyellow;
 }
-.navbarContainer {
+.Container {
     width: 100%;
     display: flex;
     justify-content: space-between;

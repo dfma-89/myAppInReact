@@ -1,43 +1,93 @@
 //Arriba del componente van los IMPORTS
 //En el medio delcaramos el componnete funcional con lo que debe renderizar y la lógica que tenga
 //Abajo del componente, van los EXPORTS
-import ItemListContainer from "./Components/ItemListContainer";
-import NavBar from "./Components/NavBar";
-import {  Routes, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+// components
+import Navbar from "./Components/Navbar";
+import CharacterList from "./Components/CharacterList";
 
-const App = () => {
-  //Logica del componente
-  //console.log ("App");
-  //Renderizar el componente
+function App() {
+  const [characters, setCharacters] = useState([]);
+  const [info, setInfo] = useState({});
+  const url = "https://rickandmortyapi.com/api/character";
+
+  const fetchCharacters = (url) => {
+    axios
+      .get(url)
+      .then((data) => {
+        setCharacters(data.data.results);
+        setInfo(data.data.info);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleNextPage = () => {
+    fetchCharacters(info.next);
+    window.scrollTo(0, 0);
+  };
+
+  const handlePreviousPage = () => {
+    fetchCharacters(info.prev);
+    window.scrollTo(0, 0);
+  };
+
+  useEffect(() => {
+    fetchCharacters(url);
+  }, []);
+
   return (
-    <div className="App">
-      <NavBar />
-      <Routes>
-        <Route
-          path="/"
-          element={<ItemListContainer nameEcommerce="Tuki Store" />}
-        />
-        <Route
-          path="/category/:category/:id"
-          element={<ItemListContainer nameEcommerce="Tuki Store" />}
-        />
-        <Route
-          path="/about"
-          element={<h1>Work in progress: About</h1>}
-        />
-        <Route
-          path="*"
-          element={<ItemListContainer nameEcommerce="Tuki Store" />}
-        />
-        <Route
-          path="/item/:id"
-          element={<h1>Work in progress: Item</h1>}
-        />
-      </Routes>
-       {/* Tags de Autocierre */}
-    </div>
+    <>
+      <Navbar brand="Rick and Morty App" />
+
+      <div className="container py-5">
+        <nav>
+          <ul className="pagination justify-content-center">
+            {info.prev ? (
+              <li className="page-item">
+                <button className="page-link" onClick={handlePreviousPage}>
+                  Previous
+                </button>
+              </li>
+            ) : null}
+            {info.next ? (
+              <li className="page-item">
+                <button className="page-link" onClick={handleNextPage}>
+                  Next
+                </button>
+              </li>
+            ) : null}
+          </ul>
+        </nav>
+      </div>
+
+      <CharacterList characters={characters} />
+
+      <div className="container pb-5">
+        <nav>
+          <ul className="pagination justify-content-center">
+            {info.prev ? (
+              <li className="page-item">
+                <button className="page-link" onClick={handlePreviousPage}>
+                  Previous
+                </button>
+              </li>
+            ) : null}
+            {info.next ? (
+              <li className="page-item">
+                <button className="page-link" onClick={handleNextPage}>
+                  Next
+                </button>
+              </li>
+            ) : null}
+          </ul>
+        </nav>
+      </div>
+    </>
   );
-};
+}
 
 export default App;
 
