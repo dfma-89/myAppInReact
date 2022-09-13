@@ -1,25 +1,28 @@
+body {
+    background-color: antiquewhite;
+}
 
 .App {
+  background-color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Lato', sans-serif;
+}
+
+.Navbar {
+    background-color: black;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
-.containerTukiComponents {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
+
+.h3Style {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.TukiChild {
-    background-color: greenyellow;
-}
-.Container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-.imageCart {
-    width: 50px;
-    height: 50px;
-}
+
+

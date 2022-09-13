@@ -1,45 +1,40 @@
-import React, {Fragment, useState} from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 
-const Formulario = () => {
+function Formulario() {
+  return (
+    <Row className="p-5">
+    <Form className="formStyle  col-6 ">
+      <Form.Group className="mb-3 mt-3">
+        <Form.Label className="mb-0">Nombre</Form.Label>
+        <Form.Control type="text" placeholder="Ingrese su nombre" requiered />
+      </Form.Group>
 
+      <Form.Group className="mb-3">
+        <Form.Label>Apellido</Form.Label>
+        <Form.Control type="text" placeholder="Ingrese su apellido" />
+      </Form.Group>
 
-    const [datos, setDatos] = useState({
-        nombre: '',
-        apellido: ''
-    })
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email </Form.Label>
+        <Form.Control type="email" placeholder="Ingrese su email" />
+    
+      </Form.Group>
 
-    const handleInputChange = (event) => {
-        // console.log(event.target.name)
-        // console.log(event.target.value)
-        setDatos({
-            ...datos,
-            [event.target.name] : event.target.value
-        })
-    }
-
-    const enviarDatos = (event) => {
-        event.preventDefault()
-        console.log('enviando datos...' + datos.nombre + ' ' + datos.apellido)
-    }
-
-    return (
-        <Fragment>
-            <h1>Primero registra tus datos</h1>
-            <form className="row" onSubmit={enviarDatos}>
-                <div className="col-md-3">
-                    <input type="text" placeholder="Nombre" className="form-control" onChange={handleInputChange} name="nombre"></input>
-                </div>
-                <div className="col-md-3">
-                    <input type="text" placeholder="Apellido" className="form-control" onChange={handleInputChange} name="apellido"></input>
-                </div>
-                <button type="submit" className="btn btn-primary">Enviar</button>
-            </form>
-            <ul>
-                <li>{datos.nombre}</li>
-                <li>{datos.apellido}</li>
-            </ul>
-        </Fragment>
-    );
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" placeholder="Password" requiered />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        <Form.Check type="checkbox" label="Check me in" />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Enviar
+      </Button>
+    </Form>
+    </Row>
+  );
 }
- 
+
 export default Formulario;

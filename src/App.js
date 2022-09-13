@@ -1,20 +1,21 @@
 import React from 'react';
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Navbar from './Components/Navbar'
 import TableData from './Components/TableData';
 import Formulario from './Components/Formulario';
+import Home from './Components/Home';
+import Characters from './Components/Characters';
 
 function App() {
   return (
     <>
       <div className="App">
-        <Navbar />
+        <Navbar className="Navbar" />
         <Routes>
-          <Route path="/" element={<Formulario />} />
+          <Route path="/Home" element={<Home />} />
+          <Route path="/Formulario" element={<Formulario />} />
           <Route path="/TableData" element={<TableData />} />
-          {/* <Route path="/" element={<Table />} />
-          <Route path="/" element={<RickandMorti />} />
-          <Route path="/*" element={<Navigate to="/" />} /> */}
+          <Route path="/Characters" element={<Characters />} />
         </Routes>
       </div>
     </>
