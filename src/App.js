@@ -12,6 +12,7 @@ function App() {
       <div className="App">
         <Navbar className="Navbar" />
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/Formulario" element={<Formulario />} />
           <Route path="/TableData" element={<TableData />} />
